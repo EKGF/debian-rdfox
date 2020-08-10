@@ -23,6 +23,7 @@ RUN useradd --system --no-user-group --home-dir /home/ekgprocess --create-home -
    chgrp -Rf root /home/ekgprocess && chmod -Rf g+w /home/ekgprocess
 
 COPY --chown=ekgprocess:root --from=download_stage /tmp/rdfox ${HOME}/rdfox
+COPY --chown=ekgprocess:root entrypoint.sh /home/ekgprocess/
 
 ENV PATH=${PATH}:/home/ekgprocess/rdfox
 
@@ -31,7 +32,15 @@ ENV RDFOX_PASSWORD=admin
 
 USER ekgprocess
 
-ENTRYPOINT ["/home/ekgprocess/rdfox/RDFox"]
+ENV PORT=12110
+EXPOSE ${PORT}
 
-CMD [ "sandbox"]
+#ENTRYPOINT ["/home/ekgprocess/rdfox/RDFox"]
+
+# CMD [ "sandbox"]
+
+# CMD [ "/bin/bash", "-c", "RDFox", "daemon", "endpoint.port=${PORT}" ]
+
+ENTRYPOINT ["/home/ekgprocess/entrypoint.sh"]
+
 

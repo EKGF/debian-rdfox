@@ -1,10 +1,10 @@
 # debian-rdfox
 
-Runs the RDFox triple store.
+Runs the RDFox (pronounce RDF ox) triple store.
 
 ## License
 
-Get a license file from [Oxford Seantic Tech](https://www.oxfordsemantic.tech/) and store it as `RDFox.lic`
+Get a license file from [Oxford Semantic Tech](https://www.oxfordsemantic.tech/) and store it as `RDFox.lic`
 in your current directory.
 
 ## Run
@@ -15,7 +15,7 @@ rdfox_license="${local_workdir}/RDFox.lic"
 
 docker run \
   --interactive --tty --rm \
-  --mount type=bind,source=${rdfox_license},target=/home/ekgprocess/rdfox/RDFox.lic \
+  --mount type=bind,source=${rdfox_license},target=/home/ekgprocess/.RDFox/RDFox.lic \
   --mount type=bind,source=${local_workdir},target=/home/ekgprocess/workdir \
   --workdir="/home/ekgprocess/workdir" \
   ekgf/debian-rdfox
